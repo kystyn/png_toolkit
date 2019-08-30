@@ -28,8 +28,7 @@ SOURCES += \
         main.cpp \
         png_toolkit.cpp \
         png_drawer.cpp \
-        mainwindow.cpp \
-        stb_image.c
+        mainwindow.cpp
 
 HEADERS += \
         png_toolkit.h \
