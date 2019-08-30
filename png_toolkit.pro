@@ -29,13 +29,14 @@ SOURCES += \
         png_toolkit.cpp \
         png_drawer.cpp \
         mainwindow.cpp \
-        ../stb/deprecated/stb_image.c
+        stb_image.c
 
 HEADERS += \
         png_toolkit.h \
         png_drawer.h \
         mainwindow.h \
-        ../stb/stb_image.h
+        stb_image_write.h \
+        stb_image.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

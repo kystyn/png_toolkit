@@ -3,7 +3,7 @@
 
 #include <string>
 //#include <memory>
-#include "../stb/stb_image.h"
+#include "stb_image.h"
 
 struct image_data
 {
@@ -18,6 +18,7 @@ public:
     png_toolkit();
     ~png_toolkit();
     bool load( std::string const &pictureName );
+    bool save( std::string const &pictureName );
     image_data getPixelData( void ) const;
     void fillHalfRectRed( void );
 

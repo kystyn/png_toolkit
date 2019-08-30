@@ -3,7 +3,7 @@
 
 #include <QPainter>
 #include <QWidget>
-#include "../stb/stb_image.h"
+#include "stb_image.h"
 #include "png_toolkit.h"
 
 class png_drawer : public QWidget

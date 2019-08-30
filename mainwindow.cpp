@@ -19,9 +19,15 @@ main_window::main_window( QApplication &app, QWidget *parent )
 
 void main_window::keyPressEvent( QKeyEvent *event )
 {
-    if (event->key() == Qt::Key::Key_R) {
+    switch (event->key())
+    {
+    case Qt::Key::Key_R:
         toolkit.fillHalfRectRed();
         emit needRedraw();
+        break;
+    case Qt::Key::Key_S:
+        toolkit.save("changed.png");
+        break;
     }
 }
 
