@@ -15,10 +15,17 @@ struct image_data
 class png_toolkit
 {
 public:
+    enum class error {
+        WrongSize,
+        WrongFormat,
+        Ok
+    };
+
     png_toolkit();
     ~png_toolkit();
     bool load( std::string const &pictureName );
     bool save( std::string const &pictureName );
+    float R2deviation( png_toolkit const &tool, error &err ) const;
     image_data getPixelData( void ) const;
     void fillHalfRectRed( void );
 
