@@ -3,6 +3,11 @@
 #include "stb_image_write.h"
 #include "png_toolkit.h"
 
+std::map<std::string, png_toolkit::Filter> png_toolkit::filters =
+{
+  {"fillHalfRed", Filter::FILL_HALF_RED}
+};
+
 png_toolkit::png_toolkit()
 {
 }
@@ -27,13 +32,13 @@ bool png_toolkit::save( const std::string &pictureName )
 }
 
 float png_toolkit::R2deviation( const png_toolkit &tool,
-                              error &err ) const
+                              Error &err ) const
 {
     int res = 0;
 
     if (tool.imgData.w != tool.imgData.w ||
         tool.imgData.h != tool.imgData.h) {
-        err = error::WrongSize;
+        err = Error::WrongSize;
         return -1;
     }
 
@@ -50,7 +55,7 @@ float png_toolkit::R2deviation( const png_toolkit &tool,
 
     if (tool.imgData.compPerPixel < 3 ||
             imgData.compPerPixel < 3) {
-        err = error::WrongFormat;
+        err = Error::WrongFormat;
         return -1;
     }
 
@@ -59,7 +64,7 @@ float png_toolkit::R2deviation( const png_toolkit &tool,
          i += imgData.compPerPixel)
         res += euclNorm2(sub(imgData.pixels + i, tool.imgData.pixels + i));
 
-    err = error::Ok;
+    err = Error::Ok;
     return res / float(imgData.w * imgData.h);
 }
 
@@ -68,7 +73,16 @@ image_data png_toolkit::getPixelData( void ) const
     return imgData;
 }
 
-void png_toolkit::fillHalfRectRed()
+void png_toolkit::applyFilter( Filter f )
+{
+    switch (f) {
+    case Filter::FILL_HALF_RED:
+        fillHalfRed();
+        break;
+    }
+}
+
+void png_toolkit::fillHalfRed()
 {
     // alias
     auto cpp = imgData.compPerPixel;

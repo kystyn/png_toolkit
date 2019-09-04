@@ -22,7 +22,7 @@ void main_window::keyPressEvent( QKeyEvent *event )
     switch (event->key())
     {
     case Qt::Key::Key_R:
-        toolkit.fillHalfRectRed();
+        toolkit.fillHalfRed();
         emit needRedraw();
         break;
     case Qt::Key::Key_S:

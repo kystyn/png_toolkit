@@ -2,6 +2,7 @@
 #define PNG_TOOLKIT_H
 
 #include <string>
+#include <map>
 //#include <memory>
 #include "stb_image.h"
 
@@ -15,19 +16,26 @@ struct image_data
 class png_toolkit
 {
 public:
-    enum class error {
+    enum class Error {
         WrongSize,
         WrongFormat,
         Ok
+    };
+
+    enum class Filter {
+        FILL_HALF_RED
     };
 
     png_toolkit();
     ~png_toolkit();
     bool load( std::string const &pictureName );
     bool save( std::string const &pictureName );
-    float R2deviation( png_toolkit const &tool, error &err ) const;
+    float R2deviation( png_toolkit const &tool, Error &err ) const;
     image_data getPixelData( void ) const;
-    void fillHalfRectRed( void );
+    void applyFilter( Filter f );
+    void fillHalfRed( void );
+
+    static std::map<std::string, Filter> filters;
 
 private:
     image_data imgData;
