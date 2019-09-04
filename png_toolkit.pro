@@ -26,14 +26,10 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        png_toolkit.cpp \
-        png_drawer.cpp \
-        mainwindow.cpp
+        png_toolkit.cpp
 
 HEADERS += \
         png_toolkit.h \
-        png_drawer.h \
-        mainwindow.h \
         stb_image_write.h \
         stb_image.h
 

@@ -1,3 +1,4 @@
+#define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <array>
 #include "stb_image_write.h"
@@ -32,12 +33,13 @@ bool png_toolkit::save( const std::string &pictureName )
 }
 
 float png_toolkit::R2deviation( const png_toolkit &tool,
-                              Error &err ) const
+                              Error &err, int &diffPix ) const
 {
     int res = 0;
+    diffPix = 0;
 
-    if (tool.imgData.w != tool.imgData.w ||
-        tool.imgData.h != tool.imgData.h) {
+    if (imgData.w != tool.imgData.w ||
+        imgData.h != tool.imgData.h) {
         err = Error::WrongSize;
         return -1;
     }
@@ -62,7 +64,10 @@ float png_toolkit::R2deviation( const png_toolkit &tool,
     for (int i = 0;
          i < imgData.w * imgData.h * imgData.compPerPixel;
          i += imgData.compPerPixel)
+    {
+        diffPix += euclNorm2(sub(imgData.pixels + i, tool.imgData.pixels + i)) != 0;
         res += euclNorm2(sub(imgData.pixels + i, tool.imgData.pixels + i));
+    }
 
     err = Error::Ok;
     return res / float(imgData.w * imgData.h);
