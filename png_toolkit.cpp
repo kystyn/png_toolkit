@@ -32,7 +32,7 @@ bool png_toolkit::save( const std::string &pictureName )
                           imgData.pixels, 0) != 0;
 }
 
-float png_toolkit::R2deviation( const png_toolkit &tool,
+float png_toolkit::mseDeviation( const png_toolkit &tool,
                               Error &err, int &diffPix ) const
 {
     int res = 0;

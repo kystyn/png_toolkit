@@ -30,7 +30,7 @@ public:
     ~png_toolkit();
     bool load( std::string const &pictureName );
     bool save( std::string const &pictureName );
-    float R2deviation( png_toolkit const &tool, Error &err, int &diffPix ) const;
+    float mseDeviation( png_toolkit const &tool, Error &err, int &diffPix ) const;
     image_data getPixelData( void ) const;
     void applyFilter( Filter f );
     void fillHalfRed( void );
